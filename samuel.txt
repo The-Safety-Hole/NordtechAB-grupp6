@@ -1,2 +1,3 @@
 Min commit funkar!
 Test nummer 2
+Test nummer 3
