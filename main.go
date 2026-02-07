@@ -8,12 +8,13 @@ import (
 	"os"
 //	"strconv"
 //	"strings"
-	"github.com/jackc/pgx/v5"
+	"github.com/jackc/pgx/v5/pgxpool"
 	"time"
 )
 
 // Database variable
-var db *pgx.Conn
+// var db *pgx.Conn
+var db *pgxpool.Pool
 
 /*
 func saveStats() {
@@ -31,7 +32,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	d1, d2 := rand.Intn(6)+1, rand.Intn(6)+1
 	
 	// Save to DB
-	_, err := db.Exec(context.Background(),
+	_, err := db.Exec(r.Context(),
 	"INSERT INTO rolls (die1, die2, dice_type) VALUES ($1, $2, $3)",
 	d1, d2, "standard")
 
@@ -45,7 +46,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	var s1, s2 int
 	if secretUnlocked {
 		s1, s2 = rand.Intn(6)+1, rand.Intn(6)+1
-		_, err = db.Exec(context.Background(),
+		_, err = db.Exec(r.Context(),
 		"INSERT INTO rolls (die1, die2, dice_type) VALUES ($1, $2, $3)",
 		s1, s2, "secret")
 		}
@@ -136,10 +137,13 @@ func main() {
 	
 	// Time loop to pause for database initialisation
 	for i :=0; i < 10; i++ {
-		db, err = pgx.Connect(context.Background(), connStr)
+		db, err = pgxpool.New(context.Background(), connStr)
 		if err == nil {
-			fmt.Println("Successfully connected to database")
-			break
+			err = db.Ping(context.Background())
+			if err == nil {
+				fmt.Println("Successfully connected to database")
+				break
+				}
 			}
 		fmt.Printf("Database not ready yet (attempt %d/10). Waiting 2 seconds.\n", i+1)
 		time.Sleep(2*time.Second)
@@ -150,7 +154,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Unable to connect to database after 10 attempts: %v\n", err)
 		os.Exit(1)
 		}
-	defer db.Close(context.Background())
+	defer db.Close()
 	
 	// Create the table if not exist (simple migration)
 	query := `CREATE TABLE IF NOT EXISTS rolls (
