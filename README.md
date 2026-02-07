@@ -5,16 +5,16 @@ Just kidding. This is a pointless app that simulates dice rolling.
 You get two D6 dice. Click the button to roll them. It's not difficult.
 
 ### Features
--- Three-tier architecture: Nginx (proxy), Go (app), PostgreSQL (database).
--- Persistent stats: Tracks total rolls, averages, snake eyes (double 1) and total doubles.
--- Rate limiting: Nginx-level protection to prevent spam and DDoS. Also sometimes disables the database.
--- GDPR-compliant logging: Automatic IP logging for security and spam protection with short term log rotation and a 3 file retention policy.
+* Three-tier architecture: Nginx (proxy), Go (app), PostgreSQL (database).
+* Persistent stats: Tracks total rolls, averages, snake eyes (double 1) and total doubles.
+* Rate limiting: Nginx-level protection to prevent spam and DDoS. Also sometimes disables the database.
+* GDPR-compliant logging: Automatic IP logging for security and spam protection with short term log rotation and a 3 file retention policy.
 
 ### Tech Stack
--- Language: Go (Golang)
--- Database: PostgreSQL
--- Proxy: Nginx
--- Environment: Docker and Docker Compose
+* Language: Go (Golang)
+* Database: PostgreSQL
+* Proxy: Nginx
+* Environment: Docker and Docker Compose
 
 ### Installation
 1. Clone the repository:
