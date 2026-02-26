@@ -171,9 +171,10 @@ func main() {
 		
 	// Start web server
 	http.HandleFunc("/", handler)
-	fmt.Println("Server starting on port 80...")
-	// Port 80 for HTTP
-	if err := http.ListenAndServe(":80", nil); err != nil {
+	fmt.Println("Server starting on port 3000...")
+	// Port 3000 for HTTP
+	if err := http.ListenAndServe(":3000", nil); err != nil {
 		fmt.Printf("Error: %s. Contact administrator.\n", err)
 	}
 }
+

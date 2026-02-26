@@ -15,8 +15,8 @@ WORKDIR /root/
 # Kopiera lite skit
 COPY --from=builder /app/dice-app .
 
-# Öppna port 80
-EXPOSE 80
+# Öppna port 3000
+EXPOSE 3000
 
 # Kör app
 CMD ["./dice-app"]
