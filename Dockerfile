@@ -1,5 +1,5 @@
 # Väljer Linux
-FROM golang:1.23-alpine AS builder
+FROM golang:1.25.6-alpine AS builder
 # Arbetsmapp
 WORKDIR /app
 COPY . .
