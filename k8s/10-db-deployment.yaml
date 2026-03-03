@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: db
+  namespace: the-hole
+spec:
+  selector:
+    matchLabels:
+      app: db
+  template:
+    metadata:
+      labels:
+        app: db
+    spec:
+      containers:
+      - name: postgres
+        image: postgres:15
+        env:
+        - name: POSTGRES_USER
+          value: "daniel"
+        - name: POSTGRES_DB
+          value: "dicedb"
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+                name: db-pass
+                key: password
+        ports:
+        - containerPort: 5432
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: db
+  namespace: the-hole
+spec:
+  selector:
+    app: db
+  ports:
+  - port: 5432
+    targetPort: 5432

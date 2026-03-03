@@ -1,0 +1,25 @@
+cluster_name: dice-cluster
+kubeconfig_path: ./kubeconfig_dice-cluster.yaml
+
+# location: nbg1
+k3s_version: v1.31.0+k3s1
+
+networking:
+    # private_network_id: 0
+    ssh:
+        public_key_path: /home/daniel/.ssh/dice-hetzner.pub
+        private_key_path: /home/daniel/.ssh/dice-hetzner
+        use_agent: true
+
+masters_pool:
+  instance_type: cx23
+  count: 1
+  locations:
+      - nbg1
+
+worker_node_pools:
+  - name: small-nodes
+    instance_type: cpx32
+    count: 1
+    locations:
+        - hel1

@@ -1,0 +1,12 @@
+apiVersion: v1          # Which version of the K8s API to use
+kind: Pod               # What type of resource we're creating
+metadata:
+  name: my-nginx        # The name of this pod - you'll use this in commands
+  labels:
+    app: nginx          # A tag - used later so Services can find this pod
+spec:                   # The specification - what should this pod contain?
+  containers:
+  - name: nginx         # Name of the container inside the pod
+    image: nginx:alpine # Docker image to use - pulls from Docker Hub automatically
+    ports:
+    - containerPort: 80 # The port the container listens on
