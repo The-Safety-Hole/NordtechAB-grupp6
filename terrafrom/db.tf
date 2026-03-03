@@ -30,16 +30,25 @@ resource "kubernetes_deployment" "db" {
         container {
           name  = "postgres"
           image = "postgres:15"
-#	  env =
+#	  env 
 #		- name: POSTGRES_USER
 #		  value: var.POSTGRES_USER
 #		- name: POSTGRES_DB
 #		  value: var.POSTGRES_DB
 #		- name: POSTGRES_PASSWORD
 #	 	  value: var.POSTGRES_PASSWORD
-	  POSTGRES_USER = var.POSTGRES_USER
-	  POSTGRES_DB = var.POSTGRES_DB
-	  POSTGRES_PASSWORD = var.POSTGRES_PASSWORD
+	env {
+	name = "POSTGRES_USER"
+	value = var.POSTGRES_USER
+}	
+	env {
+	name = "POSTGRES_PASSWORD"
+	value = var.POSTGRES_PASSWORD
+}
+	env {
+	name = "POSTGRES_DB"
+	value = var.POSTGRES_DB
+}
 
           port {
             container_port = 5432
