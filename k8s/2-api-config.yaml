@@ -1,0 +1,25 @@
+# ConfigMap - Configuration for the API
+# Environment variables that the API container will use
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: api-config
+  namespace: the-hole
+  labels:
+    app: api
+data:
+  # Team information
+  TEAM_NAME: "the-hole"
+  NAMESPACE: "the-hole"
+
+  # Redis connection
+  # REDIS_HOST: "redis-service"  # Kubernetes service name (DNS)
+  # REDIS_PORT: "6379"
+  # DATABASE_URL: moved to a secret
+  # API configuration
+  PORT: "3000"
+  DB_HOST: "db"
+  DB_PORT: "5432"
+  DB_NAME: "dicedb"
+  DB_USER: "daniel"
