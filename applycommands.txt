@@ -1,0 +1,10 @@
+kubectl apply -f k8s/10-db-deployment.yaml && kubectl apply -f k8s/2-api-config.yaml && kubectl apply -f k8s/5-monitor-serviceaccount.yaml && kubectl apply -f k8s/6-monitor-config.yaml && kubectl apply -f k8s/7-monitor-secret.yaml && kubectl apply -f k8s/8-monitor-deployment.yaml && kubectl apply -f k8s/3-api-deployment.yaml && kubectl apply -f k8s/9-ingress.yaml
+
+10
+2
+5
+6
+7
+8
+3
+9
