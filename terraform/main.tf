@@ -21,6 +21,19 @@ provider "kubernetes" {
   # Or if you use KUBECONFIG env var, Terraform picks it up automatically
 }
 
+# --- API ---
+module "api" {
+  source    = "./modules/k8s-app"
+  name      = "api"
+  namespace = var.namespace
+  image     = var.api_image
+  port      = 3000
+  replicas  = var.api_replicas
+
+}
+
+
+
 # Create a ConfigMap in your team namespace
 resource "kubernetes_config_map" "app_config" {
   metadata {
