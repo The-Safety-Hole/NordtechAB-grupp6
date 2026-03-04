@@ -1,31 +1,55 @@
-# variables.tf — team-specific configuration
+# variables.tf — All configurable values in one place
 
 variable "namespace" {
-  description = "Your team's Kubernetes namespace"
+  description = "Kubernetes namespace for your team"
   type        = string
-  # Replace with your namespace:
-  default     = "the-hole"
 }
 
 variable "team_name" {
-  description = "Your team's display name"
+  description = "Human-readable team name"
   type        = string
-  default     = "the-hole"
+}
+
+variable "environment" {
+  description = "Deployment environment"
+  type        = string
+  default     = "production"
+
+  validation {
+    condition     = contains(["development", "staging", "production"], var.environment)
+    error_message = "Environment must be development, staging, or production."
+  }
 }
 
 variable "POSTGRES_USER" {
-  description = "Namn på Admin User"
-  type       = string
-  default    = "daniel"
-}
+  description = "Admin användare"
+  type        = string
+} 
+
 variable "POSTGRES_DB" {
-  description = "Name på Databas"
-  type       = string
-  default    = "dicedb"
-}
-variable "POSTGRES_PASSWORD" {
-  description = "Admin lösenord"
-  type       = string
-  default    = "d1c3_4pp_th3_h0l3_p455w0rd" 
+  description = "Namn på databas"
+  type 		  = string
 }
 
+variable "POSTGRES_PASSWORD" {
+  description = "Admin Lösenord"
+  type 	      = string
+}
+
+variable "api_image" {
+  description = "api container image"
+  type        = string
+  default     = "danielwchas/dice-app:v7"
+}
+
+variable "db_image" {
+  description = "DB container image"
+  type        = string
+  default     = "postgres:15"
+}
+
+variable "api_replicas" {
+  description = "Number of API replicas"
+  type        = number
+  default     = 1
+}

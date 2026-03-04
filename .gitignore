@@ -4,4 +4,5 @@ dice-app
 /k8s/7-monitor-secret.yaml
 kubeconfig_dice-cluster.yaml
 registry-key.json
-/terraform/variables.tf
+terraform/terraform.tfstate.backup
+terraform/terraform.tfstate

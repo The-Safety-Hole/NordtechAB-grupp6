@@ -7,6 +7,12 @@ terraform {
       version = "~> 2.35"
     }
   }
+
+  # Store state in Google Cloud Storage
+  backend "gcs" {
+    bucket = "chas-tf-state-the-hole"  # Replace with your team's bucket
+    prefix = "terraform/state/jonas"
+  }
 }
 
 # Use your existing kubeconfig — the same one from Week 6

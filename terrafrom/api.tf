@@ -7,12 +7,13 @@ resource "kubernetes_deployment" "api" {
 
     labels = {
       app        = "api"
+      environment = var.environment
       managed-by = "terraform"
     }
   }
 
   spec {
-    replicas = 2
+    replicas = var.api_replicas
 
     selector {
       match_labels = {
@@ -23,14 +24,15 @@ resource "kubernetes_deployment" "api" {
     template {
       metadata {
         labels = {
-          app: "api"
+          app = "api"
+          environment = var.environment
         }
       }
 
       spec {
         container {
           name  = "api"
-          image = "danielwchas/dice-app:v7"
+          image = var.api_image
 
           port {
             container_port = 3000
