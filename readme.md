@@ -1,3 +1,3 @@
 # HELLO
-## This is Group 6
+## This is Group 6 JONAS WAS HERE
 ### The Hole?
