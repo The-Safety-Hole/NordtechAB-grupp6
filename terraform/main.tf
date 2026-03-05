@@ -27,7 +27,7 @@ module "api" {
   name      = "api"
   namespace = var.namespace
   image     = var.api_image
-  port      = 3000
+  port      = 80
   target_port = 3000
   replicas  = var.api_replicas
   cpu_request    = "10m"

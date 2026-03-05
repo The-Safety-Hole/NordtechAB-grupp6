@@ -7,6 +7,7 @@ metadata {
       }
     }
     spec {
+        ingress_class_name = "nginx"
       tls {
         hosts       = ["the-hole.chas.retro87.se"]
         secret_name = "the-hole-tls"
