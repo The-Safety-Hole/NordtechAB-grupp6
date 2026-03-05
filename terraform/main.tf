@@ -27,11 +27,23 @@ module "api" {
   name      = "api"
   namespace = var.namespace
   image     = var.api_image
-  port      = 3000
+  port      = 80
+  target_port = 3000
   replicas  = var.api_replicas
+  cpu_request    = "10m"
+  memory_request = "128Mi"
+  cpu_limit      = "20m"
+  memory_limit   = "256Mi"
+#  type = "LoadBalancer"
+ 
+env_vars = {                                                                       
+  POSTGRES_USER = var.POSTGRES_USER                                                
+  POSTGRES_DB   = var.POSTGRES_DB                                                  
+  POSTGRES_PASSWORD = var.POSTGRES_PASSWORD                                        
+  DATABASE_URL = "postgres://${var.POSTGRES_USER}:${var.POSTGRES_PASSWORD}@db-service:5432/${var.POSTGRES_DB}?sslmode=disable"
+  }
 
 }
-
 # --- DB ---
 module "db" {
   source	= "./modules/k8s-app"
@@ -39,11 +51,16 @@ module "db" {
   namespace = var.namespace
   image		= var.db_image
   port		= 5432
+  target_port = 5432
   replicas  = var.db_replicas
 
 env_vars = {
-    DATABASE_URL = "postgres://${var.POSTGRES_USER}:${var.POSTGRES_PASSWORD}@db-service:5432/${var.POSTGRES_DB}?sslmode=disable"
+  POSTGRES_USER = var.POSTGRES_USER
+  POSTGRES_DB   = var.POSTGRES_DB
+  POSTGRES_PASSWORD = var.POSTGRES_PASSWORD
+ # DATABASE_URL = "postgres://${var.POSTGRES_USER}:${var.POSTGRES_PASSWORD}@db-service:5432/${var.POSTGRES_DB}?sslmode=disable"
   }
+  
 }
  
 

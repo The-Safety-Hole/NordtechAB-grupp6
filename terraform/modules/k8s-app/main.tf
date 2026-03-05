@@ -20,6 +20,10 @@ variable "port" {
   type        = number
 }
 
+variable "target_port" {
+  description = "target port"
+  type        = number
+}
 variable "replicas" {
   description = "Number of replicas"
   type        = number
@@ -118,7 +122,7 @@ resource "kubernetes_service" "app" {
     selector = { app = var.name }
     port {
       port        = var.port
-      target_port = var.port
+      target_port = var.target_port
     }
   }
 }
