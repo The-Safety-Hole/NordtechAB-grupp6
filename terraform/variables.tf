@@ -28,12 +28,12 @@ variable "POSTGRES_USER" {
 
 variable "POSTGRES_DB" {
   description = "Namn på databas"
-  type 		  = string
+  type		  = string
 }
 
 variable "POSTGRES_PASSWORD" {
   description = "Admin Lösenord"
-  type 	      = string
+  type	      = string
 }
 
 variable "api_image" {
@@ -52,4 +52,10 @@ variable "api_replicas" {
   description = "Number of API replicas"
   type        = number
   default     = 1
+}
+
+variable "db_replicas" {
+  description = "Number of db replicas"
+  type		  = number
+  default	  = 1
 }

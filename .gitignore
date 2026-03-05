@@ -6,3 +6,4 @@ kubeconfig_dice-cluster.yaml
 registry-key.json
 terraform/terraform.tfstate.backup
 terraform/terraform.tfstate
+terraform/terraform.tfvars

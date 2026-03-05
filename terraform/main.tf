@@ -32,8 +32,28 @@ module "api" {
 
 }
 
+# --- DB ---
+module "db" {
+  source	= "./modules/k8s-app"
+  name		= "db"
+  namespace = var.namespace
+  image		= var.db_image
+  port		= 5432
+  replicas  = var.db_replicas
 
 
+  env_vars = {
+  POSTGRES_USER = var.POSTGRES_USER
+  POSTGRES_DB   = var.POSTGRES_DB
+  POSTGRES_PASSWORD = var.POSTGRES_PASSWORD
+}
+ }
+
+module "team-monitor" {
+  source     = "./modules/k8s-app"
+  name		 = "team-monitor"
+  namespace  = var.namespace
+  im
 # Create a ConfigMap in your team namespace
 resource "kubernetes_config_map" "app_config" {
   metadata {
